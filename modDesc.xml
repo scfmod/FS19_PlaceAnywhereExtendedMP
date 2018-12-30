@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="40">
+    <title>
+        <en>PlaceAnywhere Extended MP</en>
+    </title>
+    <description>
+        <en>Place Objects anywhere extended version. Allows removing terrain deformation when placing objects. Multiplayer support.</en>
+    </description>
+    <author>naPalm, estyx</author>
+    <version>1.2.0.0</version>
+    <multiplayer supported="true"/>
+    <iconFilename>icon_blank.dds</iconFilename>
+    <extraSourceFiles>
+        <sourceFile filename="PlaceAnywhere.lua"/>
+    </extraSourceFiles>
+</modDesc>
