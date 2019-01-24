@@ -68,8 +68,11 @@ function PlaceAnywhere:loadMap()
     TerrainDeformation.setDynamicObjectCollisionMask = Utils.overwrittenFunction(TerrainDeformation.setDynamicObjectCollisionMask, PlaceAnywhere.setDynamicObjectCollisionMask)
     -- End original code
 
-    -- Override area owner check
+    -- Override area owner check for placeables
     PlacementScreenController.isPlacementValid = Utils.overwrittenFunction(PlacementScreenController.isPlacementValid, PlaceAnywhere.isPlacementValid)
+
+    -- Override area owner check for landscaping
+    Landscaping.isModificationAreaOnOwnedLand = Utils.overwrittenFunction(Landscaping.isModificationAreaOnOwnedLand, PlaceAnywhere.isModificationAreaOnOwnedLand);
 
     -- Override terrain displacement when placing objects (no terraforming)
     Placeable.addPlaceableLevelingArea = Utils.overwrittenFunction(Placeable.addPlaceableLevelingArea, PlaceAnywhere.addPlaceableLevelingArea)
@@ -177,6 +180,13 @@ function PlaceAnywhere:isPlacementValid(superFunc, ...)
         return true
     end
     return superFunc(self, ...)
+end
+
+function PlaceAnywhere:isModificationAreaOnOwnedLand(superFunc, ...)
+    if g_currentMission.placementController.camera.isActive and PlaceAnywhere.enablePlaceAnywhere and PlaceAnywhere.overrideAreaOwnerCheck then
+        return true
+    end
+    return superFunc(self,...)
 end
 
 function PlaceAnywhere:setBlockedAreaMap(superFunc, ...)
